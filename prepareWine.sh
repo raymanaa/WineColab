@@ -87,13 +87,15 @@ echo "web_addr: 4045" > /content/config.yml
 
 # WineHQ
 dpkg --add-architecture i386
-wget -nc https://dl.winehq.org/wine-builds/winehq.key
-apt-key add winehq.key
-
-apt install software-properties-common  
-apt-add-repository 'deb http://dl.winehq.org/wine-builds/ubuntu/ bionic main'  
+apt update
+wget -qO- https://dl.winehq.org/wine-builds/winehq.key | apt-key add -
+apt install software-properties-common
+apt-add-repository 'deb http://dl.winehq.org/wine-builds/ubuntu/ bionic main'
+wget -qO- https://download.opensuse.org/repositories/Emulators:/Wine:/Debian/xUbuntu_18.04/Release.key | apt-key add -
+sh -c 'echo "deb https://download.opensuse.org/repositories/Emulators:/Wine:/Debian/xUbuntu_18.04/ ./" > /etc/apt/sources.list.d/obs.list'
+apt update
 apt --fix-broken install
-apt-get install -q -y --install-recommends winehq-stable winetricks zenity
+apt-get install --install-recommends winehq-stable winetricks zenity
 
 # Xmodmap
 cat << EOS > ~/.Xmodmap
