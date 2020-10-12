@@ -90,7 +90,11 @@ dpkg --add-architecture i386
 wget -nc https://dl.winehq.org/wine-builds/winehq.key
 apt-key add winehq.key
 apt-add-repository 'deb https://dl.winehq.org/wine-builds/ubuntu/ bionic main'
-apt update && apt-get install -q -y --no-install-recommends wine-stable-i386 wine-stable winehq-stable winetricks zenity
+apt update
+wget https://download.opensuse.org/repositories/Emulators:/Wine:/Debian/xUbuntu_18.04/amd64/libfaudio0_19.07-0~bionic_amd64.deb
+wget https://download.opensuse.org/repositories/Emulators:/Wine:/Debian/xUbuntu_18.04/i386/libfaudio0_19.07-0~bionic_i386.deb
+sudo dpkg -i libfaudio0_19.07-0~bionic_amd64.deb libfaudio0_19.07-0~bionic_i386.deb
+apt-get install -q -y --no-install-recommends wine-stable-i386 wine-stable winehq-stable winetricks zenity
 
 # Xmodmap
 cat << EOS > ~/.Xmodmap
