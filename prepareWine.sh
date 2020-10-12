@@ -89,12 +89,15 @@ echo "web_addr: 4045" > /content/config.yml
 dpkg --add-architecture i386
 wget -nc https://dl.winehq.org/wine-builds/winehq.key
 apt-key add winehq.key
-apt-add-repository 'deb https://dl.winehq.org/wine-builds/ubuntu/ bionic main'
-apt update
-wget https://download.opensuse.org/repositories/Emulators:/Wine:/Debian/xUbuntu_18.04/amd64/libfaudio0_19.07-0~bionic_amd64.deb
-wget https://download.opensuse.org/repositories/Emulators:/Wine:/Debian/xUbuntu_18.04/i386/libfaudio0_19.07-0~bionic_i386.deb
-dpkg -i libfaudio0_19.07-0~bionic_amd64.deb libfaudio0_19.07-0~bionic_i386.deb
-apt-get install -q -y --no-install-recommends wine-stable-i386 wine-stable-amd64 wine-stable winehq-stable winetricks zenity
+
+apt install software-properties-common  
+apt-add-repository 'deb http://dl.winehq.org/wine-builds/ubuntu/ bionic main'  
+
+wget -qO- https://download.opensuse.org/repositories/Emulators:/Wine:/Debian/xUbuntu_18.04/Release.key | sudo apt-key add -  
+sudo sh -c 'echo "deb https://download.opensuse.org/repositories/Emulators:/Wine:/Debian/xUbuntu_18.04/ ./" > /etc/apt/sources.list.d/obs.list'  
+apt update 
+
+apt-get install -q -y --install-recommends winehq-stable winetricks zenity
 
 # Xmodmap
 cat << EOS > ~/.Xmodmap
