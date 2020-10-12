@@ -92,11 +92,7 @@ apt-key add winehq.key
 
 apt install software-properties-common  
 apt-add-repository 'deb http://dl.winehq.org/wine-builds/ubuntu/ bionic main'  
-
-wget -qO- https://download.opensuse.org/repositories/Emulators:/Wine:/Debian/xUbuntu_18.04/Release.key | sudo apt-key add -  
-sudo sh -c 'echo "deb https://download.opensuse.org/repositories/Emulators:/Wine:/Debian/xUbuntu_18.04/ ./" > /etc/apt/sources.list.d/obs.list'  
-apt update 
-
+apt --fix-broken install
 apt-get install -q -y --install-recommends winehq-stable winetricks zenity
 
 # Xmodmap
